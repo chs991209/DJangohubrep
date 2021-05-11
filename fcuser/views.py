@@ -12,11 +12,11 @@ def register(request):
         password = request.POST['password']
         re_password = request.POST['re-password']
 
-    fcuser = Fcuser(
+        fcuser = Fcuser(
         username=username,
         password=password
-    )
+        )
 
-    fcuser.save()
+        fcuser.save()
 
-    return render(request, 'register.html')
+        return render(request, 'register.html')
