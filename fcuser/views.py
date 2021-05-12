@@ -12,12 +12,13 @@ def register(request):
         return render(request, 'register.html')
     elif request.method == 'POST':
         username = request.POST.get('username', None)
+        useremail = request.POST.get('useremail', None)
         password = request.POST.get('password', None)
         re_password = request.POST.get('re-password', None)
 
         res_data = {}
 
-        if not (username and password and re_password):
+        if not (username and password and re_password and useremail):
             res_data['error'] = 'Input every values'
 
         elif password != re_password:
@@ -26,7 +27,8 @@ def register(request):
         else:
                 fcuser = Fcuser(
                     username=username,
-                    password=make_password(password)
+                    password=make_password(password),
+                    useremail=useremail
                 )
 
                 fcuser.save()
