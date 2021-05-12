@@ -11,12 +11,16 @@ def register(request):
     if request.method == 'GET':
         return render(request, 'register.html')
     elif request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        re_password = request.POST['re-password']
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
+        re_password = request.POST.get('re-password', None)
 
         res_data = {}
-        if password != re_password:
+
+        if not (username and password and re_password):
+            res_data['error'] = 'Input every values'
+
+        elif password != re_password:
             res_data['error'] = 'Different Password'
 
         else:
