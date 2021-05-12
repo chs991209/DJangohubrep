@@ -1,5 +1,7 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Fcuser
+
 
 # Create your views here.
 
@@ -12,11 +14,16 @@ def register(request):
         password = request.POST['password']
         re_password = request.POST['re-password']
 
-        fcuser = Fcuser(
-        username=username,
-        password=password
-        )
+        res_data = {}
+        if password != re_password:
+            res_data['error'] = 'Different Password'
 
-        fcuser.save()
+        else:
+                fcuser = Fcuser(
+                username=username,
+                password=password
+                )
 
-        return render(request, 'register.html')
+                fcuser.save()
+
+        return render(request, 'register.html', res_data)
