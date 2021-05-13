@@ -1,13 +1,31 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Fcuser
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import check_password
 
 
 # Create your views here.
 
 def login(request):
-    return render(request, 'login.html')
+    if request.method == 'GET':
+        return render(request, 'login.html')
+    elif request.method == 'POST':
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
+
+        res_data = {}
+
+        if not (username and password):
+            res_data['error'] = 'Input every values'
+        else:
+                fcuser = Fcuser.objects.get(username == username)
+                if check_password(password,  fcuser.password):
+
+                    pass
+                else:
+                    res_data['error'] = 'Wrong Password'
+
+        return render(request, 'login.html')
 
 
 def register(request):
@@ -28,12 +46,12 @@ def register(request):
             res_data['error'] = 'Different Password'
 
         else:
-                fcuser = Fcuser(
-                    username=username,
-                    password=make_password(password),
-                    useremail=useremail
-                )
+            fcuser = Fcuser(
+                username=username,
+                password=make_password(password),
+                useremail=useremail
+            )
 
-                fcuser.save()
+            fcuser.save()
 
         return render(request, 'register.html', res_data)
