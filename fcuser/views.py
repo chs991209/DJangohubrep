@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Fcuser
 from django.contrib.auth.hashers import check_password
 
@@ -20,7 +20,7 @@ def login(request):
         else:
                 fcuser = Fcuser.objects.get(username == username)
                 if check_password(password,  fcuser.password):
-
+                    return redirect('/')
                     pass
                 else:
                     res_data['error'] = 'Wrong Password'
