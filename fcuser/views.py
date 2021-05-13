@@ -20,6 +20,7 @@ def login(request):
         else:
                 fcuser = Fcuser.objects.get(username == username)
                 if check_password(password,  fcuser.password):
+                    request.session['user'] = fcuser.id
                     return redirect('/')
                     pass
                 else:
