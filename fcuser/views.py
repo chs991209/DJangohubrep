@@ -6,7 +6,13 @@ from django.contrib.auth.hashers import make_password, check_password
 
 # Create your views here.
 
-def home():
+def home(request):
+    user = request.session.get('user')
+
+    if user:
+        fcuser = Fcuser.username.get(pk=user)
+        return HttpResponse(fcuser.username)
+
     return HttpResponse('Home!')
 
 
@@ -25,9 +31,9 @@ def login(request):
             if check_password(password, fcuser.password):
                 request.session['user'] = fcuser.id
                 return redirect('/')
-                pass
             else:
                 res_data['error'] = 'Wrong Password'
+
         return render(request, 'login.html')
 
 
