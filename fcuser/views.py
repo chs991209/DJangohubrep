@@ -3,14 +3,14 @@ from django.shortcuts import render, redirect
 from .models import Fcuser
 from django.contrib.auth.hashers import make_password, check_password
 
-
 # Create your views here.
 
-def home(request):
-    user = request.session.get('user')
 
-    if user:
-        fcuser = Fcuser.username.get(pk=user)
+def home(request):
+    user_id = request.session.get('user')
+
+    if user_id:
+        fcuser = Fcuser.username.get(pk=user_id)
         return HttpResponse(fcuser.username)
 
     return HttpResponse('Home!')
@@ -34,7 +34,7 @@ def login(request):
             else:
                 res_data['error'] = 'Wrong Password'
 
-        return render(request, 'login.html')
+        return render(request, 'login.html', res_data)
 
 
 def register(request):

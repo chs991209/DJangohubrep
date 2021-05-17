@@ -4,6 +4,7 @@ from django.db import models
 
 
 class Fcuser(models.Model):
+    objects = models.Manager()
     username = models.CharField(max_length=64,
                                 verbose_name='사용자명')
     useremail = models.EmailField(max_length=128,
