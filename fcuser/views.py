@@ -20,13 +20,20 @@ def home(request):
 
 def logout(request):
     if request.session.get('user'):
-        del (request.session['user'])
+        del(request.session['user'])
 
     return redirect('/')
 
 
 def login(request):
-    form = LoginForm()
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            # session
+            return redirect('/')
+    else:
+        form = LoginForm()
+
     return render(request, 'login.html', {'form': form})
 
 
