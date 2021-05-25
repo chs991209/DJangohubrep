@@ -6,7 +6,12 @@ from .forms import BoardForm
 
 
 def board_write(request):
-    form = BoardForm()
+    if request.method == 'POST':
+        form = BoardForm(request.POST)
+        if form.is_valid():
+
+    else:
+        form = BoardForm()
     return render(request, 'board_write.html', {'form': form})
 
 
