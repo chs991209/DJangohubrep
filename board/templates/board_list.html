@@ -12,21 +12,22 @@
                 <th>아이디</th>
                 <th>일시</th>
                 </tr>
-            </thead>j
-            {{ boards }}
+            </thead>
             <tbody class="text-dark">
+                {%   for board in boards %}
                 <tr>
-                    <th>1</th>
+                    <th>{{  board.id }}</th>
                     <td>
-                        제목 테스트입니다
+                        {{  board.title }}
                     </td>
                     <td>
-                        fcuser
+                        {{  board.writer }}
                     </td>
                     <td>
-                        2021/05/24 11:25:07
+                        {{ board.registered_dtm }}
                     </td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
