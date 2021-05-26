@@ -6,9 +6,7 @@
         <div class="form-group">
             <label for="{{  field.id_for_label  }}">{{  field.label  }}
             </label>
-            {{  field.field.widget.name }}
-            {% ifequal field.name 'contents' %}
-            <textarea class="form-control" name="{{  field.name  }}" placeholder="{{    field.label   }}"></textarea>
+            <textarea class="form-control" name="{{  field.name  }}" placeholder="{{    field.label   }}" readonly></textarea>
             {% else %}
             <input type="{{ field.field.widget.input_type   }}" class="form-control" id = "{{  field.id_for_label  }}"
                    placeholder="{{   field.label }}" name="{{   field.name  }}" />
