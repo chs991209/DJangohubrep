@@ -6,6 +6,9 @@ from .forms import BoardForm
 
 # Create your views here.
 
+def board_detail(request):
+    return render(request, 'board_detail.html')
+
 
 def board_write(request):
     if request.method == 'POST':
