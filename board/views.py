@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from fcuser.models import Fcuser
 from .models import Board
 from .forms import BoardForm
@@ -18,6 +18,10 @@ def board_write(request):
             board.title = form.cleaned_data['title']
             board.contents = form.cleaned_data['contents']
             board.writer = fcuser
+            board.save()
+
+            return redirect('/board/list/')
+
     else:
         form = BoardForm()
     return render(request, 'board_write.html', {'form': form})
