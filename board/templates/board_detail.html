@@ -5,16 +5,14 @@
     <div class="col-12">
         <div class="form-group">
             <label for="title">제목
+                </label>
+            <input type="text" class="form-control" id = "title"  value="" readonly/>
+            <label for="contents">내용
             </label>
-            <input type="{{ field.field.widget.input_type  }}" class="form-control" id = "{{  field.id_for_label  }}"
-                   placeholder="{{   field.label }}" name="{{   field.name  }}" readonly/>
-            <label for="title">제목
-            </label>
-            <textarea class="form-control" name="{{  field.name  }}" placeholder="{{    field.label   }}" readonly></textarea>
+            <textarea class="form-control" readonly></textarea>
         </div>
-        <span style="color: red">{{  field.errors  }}</span>
         <button type="submit" class="btn btn-primary">
-                글쓰기
+                목록
             </button>
     </div>
 </div>
