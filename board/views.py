@@ -17,6 +17,9 @@ def board_detail(request, pk):
 
 
 def board_write(request):
+    if not request.session.get('user'):
+        return redirect('/login')
+
     if request.method == 'POST':
         form = BoardForm(request.POST)
         if form.is_valid():
