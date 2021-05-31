@@ -6,8 +6,9 @@ from .forms import BoardForm
 
 # Create your views here.
 
-def board_detail(request):
-    return render(request, 'board_detail.html')
+def board_detail(request, pk):
+    board = Board.obejcts.get(pk=pk)
+    return render(request, 'board_detail.html', {'board': board})
 
 
 def board_write(request):
