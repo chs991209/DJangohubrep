@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import Http404
 from fcuser.models import Fcuser
 from .models import Board
 from .forms import BoardForm
@@ -7,7 +8,11 @@ from .forms import BoardForm
 # Create your views here.
 
 def board_detail(request, pk):
-    board = Board.obejcts.get(pk=pk)
+    try:
+        board = Board.obejcts.get(pk=pk)
+    except Board.DoesNotExist:
+        raise Http404('Cannot found the content')
+
     return render(request, 'board_detail.html', {'board': board})
 
 
